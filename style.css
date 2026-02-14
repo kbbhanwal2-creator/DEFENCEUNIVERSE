@@ -1,0 +1,26 @@
+body {
+  background: radial-gradient(circle at top, #020617, #000000);
+}
+
+.hud-card {
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(0,255,150,0.25);
+}
+
+.scan-lines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 2px,
+    rgba(0,255,150,0.05) 3px
+  );
+  pointer-events: none;
+}
+
+.glow {
+  box-shadow: 0 0 15px rgba(0,255,150,0.5);
+}
