@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DEFENCEUNIVERSE Command Center</title>
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- External CSS -->
+<link rel="stylesheet" href="style.css">
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="text-green-400 font-mono min-h-screen relative scan-lines">
+
+<!-- NAVBAR -->
+<header class="p-4 border-b border-green-500/30">
+  <h1 class="text-2xl font-bold tracking-widest">
+    🛡️ DEFENCEUNIVERSE — Command Center
+  </h1>
+</header>
+
+<!-- MAIN GRID -->
+<main class="p-6 grid md:grid-cols-2 gap-6">
+
+  <!-- MOCK TEST PANEL -->
+  <section class="hud-card rounded-2xl p-6">
+    <h2 class="text-xl font-bold mb-4">🎯 Tactical Mock Tests</h2>
+
+    <div class="grid grid-cols-2 gap-3">
+      <button class="test-btn glow bg-green-500/20 p-3 rounded-xl hover:bg-green-500/40">Air Force</button>
+      <button class="test-btn glow bg-green-500/20 p-3 rounded-xl hover:bg-green-500/40">Army</button>
+      <button class="test-btn glow bg-green-500/20 p-3 rounded-xl hover:bg-green-500/40">Navy</button>
+      <button class="test-btn glow bg-green-500/20 p-3 rounded-xl hover:bg-green-500/40">NDA/CDS</button>
+    </div>
+
+    <p id="testStatus" class="mt-4 text-sm text-green-300">
+      Select a mission to begin.
+    </p>
+  </section>
+
+  <!-- AI DOUBT DESTROYER -->
+  <section class="hud-card rounded-2xl p-6">
+    <h2 class="text-xl font-bold mb-4">🤖 AI Doubt Destroyer</h2>
+
+    <textarea id="doubtInput"
+      class="w-full bg-black/40 border border-green-500/30 rounded-xl p-3 text-green-200"
+      rows="4"
+      placeholder="Enter your English or GK doubt..."></textarea>
+
+    <button id="askAI"
+      class="mt-3 w-full bg-green-500/30 hover:bg-green-500/50 p-3 rounded-xl glow">
+      Get Tactical Intel
+    </button>
+
+    <div id="aiResponse"
+      class="mt-4 text-sm text-green-300 min-h-[60px]">
+      Awaiting query…
+    </div>
+  </section>
+
+  <!-- ANALYTICS -->
+  <section class="hud-card rounded-2xl p-6 md:col-span-2">
+    <h2 class="text-xl font-bold mb-4">📡 Mastery Analytics</h2>
+    <canvas id="radarChart" height="120"></canvas>
+  </section>
+
+</main>
+
+<footer class="text-center text-green-500/60 p-4 text-sm">
+  Developed by Jai Dev (JD) | Defense Mastery AI
+</footer>
+
+<script>
+/* MOCK TEST CLICK */
+document.querySelectorAll(".test-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.getElementById("testStatus").innerText =
+      "Mission Loaded: " + btn.innerText + " — Prepare for deployment.";
+  });
+});
+
+/* AI DEMO (LOCAL) */
+document.getElementById("askAI").addEventListener("click", () => {
+  const q = document.getElementById("doubtInput").value.trim();
+  const res = document.getElementById("aiResponse");
+
+  if (!q) {
+    res.innerText = "⚠️ Enter a doubt first.";
+    return;
+  }
+
+  res.innerText = "🔍 Processing tactical intelligence...";
+
+  setTimeout(() => {
+    res.innerText =
+      "✅ Intel: Focus on subject-verb agreement. Singular subject → singular verb.";
+  }, 900);
+});
+
+/* RADAR CHART */
+const ctx = document.getElementById('radarChart');
+
+new Chart(ctx, {
+  type: 'radar',
+  data: {
+    labels: ['Nouns','Verbs','Tenses','Articles','Vocabulary','GK'],
+    datasets: [{
+      label: 'Combat Readiness',
+      data: [70,60,65,50,55,75],
+      borderColor: 'rgb(34,197,94)',
+      backgroundColor: 'rgba(34,197,94,0.2)'
+    }]
+  },
+  options: {
+    scales: {
+      r: {
+        angleLines: { color: 'rgba(34,197,94,0.3)' },
+        grid: { color: 'rgba(34,197,94,0.2)' },
+        pointLabels: { color: '#4ade80' },
+        ticks: { display: false }
+      }
+    },
+    plugins: {
+      legend: { labels: { color: '#4ade80' } }
+    }
+  }
+});
+
+lucide.createIcons();
+</script>
+
+</body>
+</html>
